@@ -10,6 +10,7 @@ import RegisterScreen from './screens/RegisterScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import ShippingScreen from './screens/ShippingScreen';
 import PaymentScreen from './screens/PaymentScreen';
+import PlaceOrderScreen from './screens/PlaceOrderScreen';
 
 
 const App= () => {
@@ -29,6 +30,13 @@ const App= () => {
         <Route path="/payment" element={
           <>
             <PaymentScreen/>
+          </>
+        }>  
+        </Route>
+
+        <Route path="/placeorder" element={
+          <>
+            <PlaceOrderScreen/>
           </>
         }>  
         </Route>
