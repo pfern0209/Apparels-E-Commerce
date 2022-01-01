@@ -1,8 +1,8 @@
 import { useEffect, useState} from 'react'
 import axios from 'axios'
 import { PayPalButton } from "react-paypal-button-v2";
-import {useNavigate,Link,useParams,useLocation} from 'react-router-dom'
-import {Button,Row,Col,ListGroup,Image,Card} from 'react-bootstrap'
+import {Link,useParams} from 'react-router-dom'
+import {Row,Col,ListGroup,Image,Card} from 'react-bootstrap'
 import {useDispatch, useSelector} from 'react-redux'
 import Loader from '../components/Loader'
 import Message from "../components/Message"
@@ -14,7 +14,7 @@ const OrderScreen = () => {
   const dispatch=useDispatch()
 
   const [sdkReady,setSdkReady]=useState(false)
-  const navigate=useNavigate()
+  // const navigate=useNavigate()
   const params=useParams();
   const orderId=params.id;
 
