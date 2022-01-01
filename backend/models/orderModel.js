@@ -72,6 +72,11 @@ const orderSchema=mongoose.Schema({
     required:true,
     default:0.0
   },
+  itemsPrice: {//added this later
+    type: Number,
+    required: true,
+    default: 0.0,
+  },
   isPaid:{
     type:Boolean,
     required:true,
