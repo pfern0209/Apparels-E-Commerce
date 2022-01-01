@@ -9,7 +9,6 @@ import FormContainer from '../components/FormContainer'
 
 const LoginScreen = () => {
   
-  console.log("ON LOGIN Screen")
   const[email,setEmail]=useState('')
   const[password,setPassword]=useState('')
   const location = useLocation();
