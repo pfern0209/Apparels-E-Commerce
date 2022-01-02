@@ -9,7 +9,6 @@ import FormContainer from '../components/FormContainer'
 
 const RegisterScreen = () => {
   
-  console.log("ON LOGIN Screen")
   const[name,setName]=useState('')
   const[email,setEmail]=useState('')
   const[password,setPassword]=useState('')
