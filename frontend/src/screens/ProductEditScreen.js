@@ -119,7 +119,7 @@ const ProductEditScreen = () => {
           <Form.Control type='number' placeholder="Enter price" value={price} onChange={(e)=>setPrice(e.target.value)}></Form.Control>
         </Form.Group>
 
-         <Form.Group controlId="image">
+        <Form.Group controlId="image">
     <Form.Label >
         Image
     </Form.Label>
