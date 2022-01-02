@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { useState , useEffect } from 'react'
 import {Link,useParams,useNavigate} from 'react-router-dom'
 import {Form, Button} from 'react-bootstrap'
@@ -21,6 +22,7 @@ const ProductEditScreen = () => {
   const[category,setCategory]=useState('')
   const[countInStock,setCountInStock]=useState(0)
   const[description,setDescription]=useState(0)
+  const[uploading,setUploading]=useState(false)
 
   // const location = useLocation();
   const navigate=useNavigate();
@@ -55,7 +57,30 @@ const ProductEditScreen = () => {
       setDescription(product.description)
     }
     }
-  },[product,productId,dispatch,successUpdate])
+  },[product,productId,dispatch,navigate,successUpdate])
+
+  const uploadFileHandler=async(e)=>{
+    const file=e.target.files[0];
+    const formData= new FormData()
+    formData.append('image',file)
+    setUploading(true)
+
+    try {
+      const config={
+        headers:{
+          'Content-Type':'multipart/form-data'
+        }
+      }
+      const { data }=await axios.post('/api/upload',formData,config)
+
+      setImage(data)
+      setUploading(false)
+    } catch (err) {
+      console.error(err)
+      setUploading(false)
+    }
+    console.log("On screen")
+  }
   
 
   const submitHandler=(e)=>{
@@ -94,10 +119,26 @@ const ProductEditScreen = () => {
           <Form.Control type='number' placeholder="Enter price" value={price} onChange={(e)=>setPrice(e.target.value)}></Form.Control>
         </Form.Group>
 
-        <Form.Group controlId="image">
-          <Form.Label>Image</Form.Label>
-          <Form.Control type='text' placeholder="Enter Image URL" value={image} onChange={(e)=>setImage(e.target.value)}></Form.Control>
-        </Form.Group>
+         <Form.Group controlId="image">
+    <Form.Label >
+        Image
+    </Form.Label>
+    <Form.Control
+        type="text"
+        placeholder="Enter image url" 
+        value={image} 
+        onChange={(e) => setImage(e.target.value)}
+    >
+    </Form.Control>
+    <Form.Control 
+        type="file"
+        id="image-file"
+        label="Choose file"
+        custom
+        onChange={uploadFileHandler}
+    />
+    {uploading && <Loader />}
+</Form.Group>
 
         <Form.Group controlId="brand">
           <Form.Label>Brand</Form.Label>
