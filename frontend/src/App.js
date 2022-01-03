@@ -97,7 +97,7 @@ const App= () => {
 
         <Route path="/admin/user/:id/edit" element={
           <>
-            <UserEditScreen/>
+            <UserEditScreen />
           </>
         }>  
         </Route>
