@@ -102,7 +102,14 @@ const App= () => {
         }>  
         </Route>
 
-        <Route path="/admin/productlist" element={
+        <Route exact path="/admin/productlist" element={
+          <>
+            <ProductListScreen/>
+          </>
+        }>  
+        </Route>
+
+        <Route exact path="/admin/productlist/:pageNumber" element={
           <>
             <ProductListScreen/>
           </>
@@ -123,7 +130,21 @@ const App= () => {
         }>  
         </Route>
 
-        <Route path="/search/:keyword" element={
+        <Route path="/search/:keyword" exact element={
+          <>
+            <HomeScreen/>
+          </>
+        }>  
+        </Route>
+
+        <Route exact  path="/page/:pageNumber" element={
+          <>
+            <HomeScreen/>
+          </>
+        }>  
+        </Route>
+
+        <Route exact path="/search/:keyword/page/:pageNumber" element={
           <>
             <HomeScreen/>
           </>
