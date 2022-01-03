@@ -123,6 +123,13 @@ const App= () => {
         }>  
         </Route>
 
+        <Route path="/search/:keyword" element={
+          <>
+            <HomeScreen/>
+          </>
+        }>  
+        </Route>
+
         <Route exact path="/" element={
           <>
             <HomeScreen/>
