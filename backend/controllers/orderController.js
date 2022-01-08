@@ -1,5 +1,6 @@
 import Order from "../models/orderModel.js";
 import asyncHandler from 'express-async-handler'
+import Product from '../models/productModel.js'
 
 //@desc Create new order
 //@route POST /api/orders
@@ -105,7 +106,48 @@ const updateOrderToDelivered=asyncHandler(async(req,res)=>{
     res.status(404)
     throw new Error("Order not found")
   }
-
 })
 
-export {addOrderItems,getOrderById,updateOrderToPaid,getMyOrders,getOrders,updateOrderToDelivered}
+
+
+
+//@desc Update count in stock
+//@route PUT /api/orders/:id
+//@access Private Admin
+const updateCountInStock=asyncHandler(async(req,res)=>{
+  // console.log(req.params.id)
+  // const id=mongoose.Types.ObjectId(req.params.id);
+  // console.log(id)
+  // if (id.match(/^[0-9a-fA-F]{24}$/))
+  const id=req.params.id
+  console.log("In controller")
+  console.log(id)
+  const order=await Order.findById(id)
+  const orderedProducts=order.orderItems
+  let productIds=[];
+  let qtys=[]
+  orderedProducts.forEach(function (item) {
+    productIds.push(item.product)
+    qtys.push(item.qty)
+});
+
+  for(let i=0;i<qtys.length;i++){
+    let product=await Product.findById(productIds[i])
+    let qty=qtys[i]
+
+    if(product){
+    const newStockQty=product.countInStock-qty;
+    product.countInStock=newStockQty;
+    const updatedProduct=await product.save()
+
+    res.json(updatedProduct)
+  }else{
+    res.status(404)
+    throw new Error("Order not found")
+  }
+  }
+})
+
+
+
+export {addOrderItems,getOrderById,updateOrderToPaid,getMyOrders,getOrders,updateOrderToDelivered,updateCountInStock}
