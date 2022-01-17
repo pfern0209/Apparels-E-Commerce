@@ -45,4 +45,5 @@ const sellerOrAdmin=(req,res,next)=>{
   }
 }
 
-export {protect,admin}
+// export {protect,admin}
+export {protect,admin,sellerOrAdmin}
