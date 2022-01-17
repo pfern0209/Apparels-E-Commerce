@@ -16,6 +16,7 @@ const authUser=asyncHandler(async(req,res)=>{
       name:user.name,
       email:user.email,
       isAdmin:user.isAdmin,
+      isSeller:user.isSeller,
       token: generateToken(user._id)
     })
   }else{
@@ -48,6 +49,7 @@ const registerUser=asyncHandler(async(req,res)=>{
       name:user.name,
       email:user.email,
       isAdmin:user.isAdmin,
+      isSeller:user.isSeller,
       token: generateToken(user._id)
     })
   }else{
@@ -67,7 +69,8 @@ const getUserProfile=asyncHandler(async(req,res)=>{
       _id:user._id,
       name:user.name,
       email:user.email,
-      isAdmin:user.isAdmin
+      isAdmin:user.isAdmin,
+      isSeller:user.isSeller
     })
   }else{
     res.status(404)
@@ -94,6 +97,7 @@ const updateUserProfile=asyncHandler(async(req,res)=>{
       name:updatedUser.name,
       email:updatedUser.email,
       isAdmin:updatedUser.isAdmin,
+      isSeller:updatedUser.isSeller,
       token: generateToken(updatedUser._id)
     })
 
@@ -153,6 +157,8 @@ const updateUser=asyncHandler(async(req,res)=>{
     user.email=req.body.email ||user.email
     
     user.isAdmin = req.body.isAdmin ?? user.isAdmin
+//Added seller toggle
+    user.isSeller=req.body.isSeller ?? user.isSeller
 
     const updatedUser=await user.save();
 
@@ -160,7 +166,8 @@ const updateUser=asyncHandler(async(req,res)=>{
       _id:updatedUser._id,
       name:updatedUser.name,
       email:updatedUser.email,
-      isAdmin:updatedUser.isAdmin
+      isAdmin:updatedUser.isAdmin,
+      isSeller:updatedUser.isSeller
     })
 
   }else{

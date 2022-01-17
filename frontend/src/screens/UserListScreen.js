@@ -44,7 +44,8 @@ const UserListScreen = () => {
               <th>NAME</th>
               <th>EMAIL</th>
               <th>ADMIN</th>
-              <th>ID</th>
+              <th>SELLER</th>
+              <th>UPDATE</th>
             </tr>
           </thead>
           <tbody>
@@ -55,6 +56,10 @@ const UserListScreen = () => {
                 <td><a href={`mailto:${user.email}`}>{user.email}</a></td>
                 <td>
                   {user.isAdmin ?( <i className='fas fa-check' style={{color:'green'}}></i>): (<i className='fas fa-times' style={{color:'red'}}></i>)}
+                </td>
+{/* Column to check if a user is seller */}
+                <td>
+                  {user.isSeller ?( <i className='fas fa-check' style={{color:'green'}}></i>): (<i className='fas fa-times' style={{color:'red'}}></i>)}
                 </td>
 
                 <td>

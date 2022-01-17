@@ -16,6 +16,7 @@ const UserEditScreen = () => {
   const[name,setName]=useState('')
   const[email,setEmail]=useState('')
   const[isAdmin,setIsAdmin]=useState(false)
+  const[isSeller,setIsSeller]=useState(false)
 
   // const location = useLocation();
   const navigate=useNavigate();
@@ -41,6 +42,7 @@ const UserEditScreen = () => {
       setName(user.name)
       setEmail(user.email)
       setIsAdmin(user.isAdmin)
+      setIsSeller(user.isSeller)
     }
     }
     
@@ -53,7 +55,8 @@ const UserEditScreen = () => {
       _id: userId,
       name,
       email,
-      isAdmin
+      isAdmin,
+      isSeller
     }))
     
   }
@@ -83,7 +86,10 @@ const UserEditScreen = () => {
           <Form.Check type='checkbox' label="Is Admin" checked={isAdmin}  onChange={(e)=>setIsAdmin(e.target.checked)}></Form.Check>
         </Form.Group>
 
-        
+{/* Set a customer as seller */}
+        <Form.Group controlId="isseller">
+          <Form.Check type='checkbox' label="Is Seller" checked={isSeller}  onChange={(e)=>setIsSeller(e.target.checked)}></Form.Check>
+        </Form.Group>
 
         <Button type='submit' variant='primary'>
           Update
