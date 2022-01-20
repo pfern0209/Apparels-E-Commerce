@@ -8,6 +8,7 @@ import Loader from '../components/Loader'
 import Message from "../components/Message"
 import { getOrderDetails, payOrder,deliverOrder,updateStockAfterOrder } from '../actions/orderActions'
 import { ORDER_PAY_RESET,ORDER_DELIVER_RESET } from '../constants/orderConstants';
+import { PRODUCT_DETAILS_RESET } from '../constants/productConstants';
 
 const OrderScreen = () => {
   const navigate=useNavigate();
@@ -53,6 +54,7 @@ const OrderScreen = () => {
       dispatch(getOrderDetails(orderId))
       //Stock update
       dispatch(updateStockAfterOrder(order))
+      dispatch({type:PRODUCT_DETAILS_RESET})
     }else if(!order.isPaid){
       if(!window.paypal){
         addPayPalScript()
