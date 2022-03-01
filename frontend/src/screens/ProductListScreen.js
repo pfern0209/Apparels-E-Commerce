@@ -52,6 +52,20 @@ const ProductListScreen = () => {
     }
   }
 
+  let sellerCreatedProducts=[]
+
+  if(userInfo.isSeller){
+    sellerCreatedProducts=products.filter(checkCreated);
+    function checkCreated(product){
+      if(product.user === userInfo._id){
+        return product
+      }
+    }
+
+  }
+  
+
+
   return (
     <>
       <Row className='align-items-center'>
@@ -82,6 +96,7 @@ const ProductListScreen = () => {
             </tr>
           </thead>
           <tbody>
+            {/* <h2>Admin</h2>
             {products.map(product=>(
               <tr key={product._id}>
                 <td>{product._id}</td>
@@ -103,6 +118,72 @@ const ProductListScreen = () => {
 
               </tr>
             ))}
+
+
+            <h2>Seller</h2>
+            {sellerCreatedProducts.map(product=>(
+              <tr key={product._id}>
+                <td>{product._id}</td>
+                <td>{product.name}</td>
+                <td>${product.price}</td>
+                <td>{product.category}</td>
+                <td>{product.brand}</td>
+
+                <td>
+                  <LinkContainer to={`/admin/product/${product._id}/edit`}>
+                    <Button variant='light' className='btn-sm'>
+                      <i className='fas fa-edit'></i>
+                    </Button>
+                  </LinkContainer>
+                  <Button variant='danger' className='btn-sm' onClick={()=>deleteHandler(product._id)}>
+                      <i className='fas fa-trash'></i>
+                    </Button>
+                </td>
+
+              </tr>
+            ))} */}
+
+          {userInfo.isAdmin?products.map(product=>(
+              <tr key={product._id}>
+                <td>{product._id}</td>
+                <td>{product.name}</td>
+                <td>${product.price}</td>
+                <td>{product.category}</td>
+                <td>{product.brand}</td>
+
+                <td>
+                  <LinkContainer to={`/admin/product/${product._id}/edit`}>
+                    <Button variant='light' className='btn-sm'>
+                      <i className='fas fa-edit'></i>
+                    </Button>
+                  </LinkContainer>
+                  <Button variant='danger' className='btn-sm' onClick={()=>deleteHandler(product._id)}>
+                      <i className='fas fa-trash'></i>
+                    </Button>
+                </td>
+              </tr>
+            )):sellerCreatedProducts.map(product=>(
+              <tr key={product._id}>
+                <td>{product._id}</td>
+                <td>{product.name}</td>
+                <td>${product.price}</td>
+                <td>{product.category}</td>
+                <td>{product.brand}</td>
+
+                <td>
+                  <LinkContainer to={`/admin/product/${product._id}/edit`}>
+                    <Button variant='light' className='btn-sm'>
+                      <i className='fas fa-edit'></i>
+                    </Button>
+                  </LinkContainer>
+                  <Button variant='danger' className='btn-sm' onClick={()=>deleteHandler(product._id)}>
+                      <i className='fas fa-trash'></i>
+                    </Button>
+                </td>
+
+              </tr>
+            ))}
+
           </tbody>
         </Table>
         <Paginate pages={pages} page={page} isAdmin={true}/>
