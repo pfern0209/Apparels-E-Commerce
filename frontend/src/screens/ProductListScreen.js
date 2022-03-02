@@ -51,9 +51,8 @@ const ProductListScreen = () => {
       dispatch(deleteProduct(id))
     }
   }
-
-  let sellerCreatedProducts=[]
-
+console.log(products.length)
+  var sellerCreatedProducts=[]
   if(userInfo.isSeller){
     sellerCreatedProducts=products.filter(checkCreated);
     function checkCreated(product){
@@ -61,8 +60,9 @@ const ProductListScreen = () => {
         return product
       }
     }
-
   }
+
+ 
   
 
 
@@ -137,7 +137,7 @@ const ProductListScreen = () => {
                   </LinkContainer>
                   <Button variant='danger' className='btn-sm' onClick={()=>deleteHandler(product._id)}>
                       <i className='fas fa-trash'></i>
-                    </Button>
+                    </Button> 
                 </td>
 
               </tr>
