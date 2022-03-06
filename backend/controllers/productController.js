@@ -145,12 +145,11 @@ const getTopProducts=asyncHandler(async(req,res)=>{
 })
 
 //@desc Get product list for seller
-//@route GET /api/products/seller/:id
+//@route GET /api/products/user/:id
 //@access Seller
-// const getProductList=asyncHandler(async(req,res)=>{
-//   const products=await Product
+const getSellerProductList=asyncHandler(async(req,res)=>{
+  const sellerProducts= await Product.find({"user":[req.params.id]})
+  res.json(sellerProducts)
+})
 
-//   res.json(products)
-// })
-
-export {getProductById,getProducts,deleteProduct,createProduct,updateProduct,createProductReview,getTopProducts}
+export {getProductById,getProducts,deleteProduct,createProduct,updateProduct,createProductReview,getTopProducts,getSellerProductList}
