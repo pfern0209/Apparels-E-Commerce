@@ -20,6 +20,14 @@ const getProducts=asyncHandler(async(req,res)=>{
   res.json({products,page,pages:Math.ceil(count/pageSize)})
 })
 
+//@desc Get product list for seller
+//@route GET /api/seller/products/user/:id
+//@access Seller
+const getSellerProductList=asyncHandler(async(req,res)=>{
+  const sellerProducts= await Product.find({"user":[req.params.id]})
+  res.json({sellerProducts})
+})
+
 //@desc Fetches one product
 //@route GET /api/products/:id
 //@access Public Route
@@ -144,12 +152,6 @@ const getTopProducts=asyncHandler(async(req,res)=>{
   res.json(products)
 })
 
-//@desc Get product list for seller
-//@route GET /api/products/user/:id
-//@access Seller
-const getSellerProductList=asyncHandler(async(req,res)=>{
-  const sellerProducts= await Product.find({"user":[req.params.id]})
-  res.json(sellerProducts)
-})
+
 
 export {getProductById,getProducts,deleteProduct,createProduct,updateProduct,createProductReview,getTopProducts,getSellerProductList}

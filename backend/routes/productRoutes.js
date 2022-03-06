@@ -5,7 +5,7 @@ import { protect, admin, sellerOrAdmin,seller } from "../middleware/authMiddlewa
 
 const router=express.Router()
 
-router.route('/user/:id').get(protect,seller,getSellerProductList)
+router.get('/user/:id',protect,seller,getSellerProductList)
 
 // router.route('/').get(getProducts).post(protect,admin,createProduct)
 router.route('/').get(getProducts).post(protect,sellerOrAdmin,createProduct)

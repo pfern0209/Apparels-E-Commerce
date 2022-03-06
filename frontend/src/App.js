@@ -16,6 +16,7 @@ import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
 import ProductListScreen from './screens/ProductListScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
+import SellerProductListScreen from './screens/ProductEditScreen';
 import OrderListScreen from './screens/OrderListScreen';
 
 
@@ -76,6 +77,14 @@ const App= () => {
         }>  
         </Route>
 
+        {/* Seller Products list */}
+        {/* <Route exact path="/admin/productlist" element={
+          <>
+            <SellerProductListScreen/>
+          </>
+        }>  
+        </Route> */}
+
         <Route path="/product/:id" element={
           <>
             <ProductScreen/>
@@ -115,6 +124,7 @@ const App= () => {
           </>
         }>  
         </Route>
+
 
         <Route path="/admin/product/:id/edit" element={
           <>
