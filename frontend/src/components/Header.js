@@ -28,6 +28,12 @@ const Header = () => {
         <Navbar.Collapse id="basic-navbar-nav">
         <SearchBox/>
           <Nav className="ml-auto">
+
+          <LinkContainer to="/plan">
+            <Nav.Link>Buy Plan</Nav.Link>
+          </LinkContainer>
+
+
           <LinkContainer to="/cart">
             <Nav.Link> <i className="fas fa-shopping-cart"></i> Cart</Nav.Link>
           </LinkContainer>
@@ -60,9 +66,10 @@ const Header = () => {
 
           {userInfo && userInfo.isSeller && (
             <NavDropdown title="Seller" id="sellermenu">
-              <LinkContainer to="/admin/productlist">
+              <LinkContainer to="/seller/productlist">
                 <NavDropdown.Item>Products</NavDropdown.Item>
               </LinkContainer>
+             
             </NavDropdown>
           )}  
 

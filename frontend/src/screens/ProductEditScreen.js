@@ -5,7 +5,7 @@ import {Form, Button} from 'react-bootstrap'
 import {useDispatch, useSelector} from 'react-redux'
 import Message from "../components/Message"
 import Loader from "../components/Loader"
-import { listProductDetails,updateProduct } from '../actions/productActions'
+import { listProductDetails,updateProduct,sellerProductsList } from '../actions/productActions'
 import FormContainer from '../components/FormContainer'
 import { PRODUCT_UPDATE_RESET, PRODUCT_DETAILS_RESET } from '../constants/productConstants'
 
@@ -31,22 +31,35 @@ const ProductEditScreen = () => {
 
 
   const productDetails=useSelector(state=>state.productDetails)
-  const {loading,error,product}=productDetails
+  const {loading:loading,error,product}=productDetails
 
   const productUpdate=useSelector(state=>state.productUpdate)
   const {loading:loadingUpdate,error:errorUpdate,success:successUpdate}=productUpdate
 
-  
+  const userDetails=useSelector(state=>state.userDetails)
+  const {loading:loadingUserDetails,user}=userDetails
+
+  const userLogin=useSelector(state=>state.userLogin)
+  const {userInfo}=userLogin
 
 
   useEffect(()=>{
+    if(userInfo.isSeller){
+      navigate('/seller/productlist')
+       // dispatch(sellerProductsList(userInfo._id))
+    }
     if(successUpdate){
       dispatch({ type: PRODUCT_UPDATE_RESET })
       dispatch({type: PRODUCT_DETAILS_RESET})
+      
       navigate('/admin/productlist')
     }else{
       if(!product.name || product._id!==productId){
-      dispatch(listProductDetails(productId))
+       if(userInfo.isSeller){
+          dispatch(sellerProductsList(userInfo._id))
+       } else{        
+          dispatch(listProductDetails(productId))
+       }
     }else{
       setName(product.name)
       setPrice(product.price)

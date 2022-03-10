@@ -18,6 +18,7 @@ import ProductListScreen from './screens/ProductListScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
 import SellerProductListScreen from './screens/ProductEditScreen';
 import OrderListScreen from './screens/OrderListScreen';
+import PlanScreen from './screens/PlanScreen';
 
 
 
@@ -77,15 +78,29 @@ const App= () => {
         }>  
         </Route>
 
+        <Route path="/plan" element={
+          <>
+            <PlanScreen/>
+          </>
+        }>  
+        </Route>
+
         {/* Seller Products list */}
-        {/* <Route exact path="/admin/productlist" element={
+        <Route exact path="/seller/productlist" element={
           <>
             <SellerProductListScreen/>
           </>
         }>  
+        </Route>
+
+        {/* <Route path="/admin/product/:id/edit" element={
+          <>
+            <ProductEditScreen/>
+          </>
+        }>  
         </Route> */}
 
-        <Route path="/product/:id" element={
+        <Route exact path="/product/:id" element={
           <>
             <ProductScreen/>
           </>
@@ -124,9 +139,9 @@ const App= () => {
           </>
         }>  
         </Route>
+{/* Original */}
 
-
-        <Route path="/admin/product/:id/edit" element={
+        <Route exact path="/admin/product/:id/edit" element={
           <>
             <ProductEditScreen/>
           </>

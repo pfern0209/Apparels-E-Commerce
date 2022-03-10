@@ -21,7 +21,7 @@ const getProducts=asyncHandler(async(req,res)=>{
 })
 
 //@desc Get product list for seller
-//@route GET /api/seller/products/user/:id
+//@route GET /api/seller/user/products/:id
 //@access Seller
 const getSellerProductList=asyncHandler(async(req,res)=>{
   const sellerProducts= await Product.find({"user":[req.params.id]})
