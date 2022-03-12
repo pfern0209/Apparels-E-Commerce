@@ -41,10 +41,14 @@ const ProductScreen = () => {
     dispatch(listProductDetails(params.id))
   },[dispatch,params.id,successProductReview])
 
+<<<<<<< HEAD
   // const addToCartHandler=()=>{
   //   navigate(`/cart/${params.id}?qty=${qty}`)
     
   // }
+=======
+ 
+>>>>>>> acd53af42c0d52659c3113314a277fe22dcc459b
 
   const addToCartHandler = () => {
         dispatch(addToCart(product._id, qty))

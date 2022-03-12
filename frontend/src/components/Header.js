@@ -1,20 +1,17 @@
 import { Navbar,Nav,Container, NavDropdown } from "react-bootstrap"
 import {useDispatch, useSelector} from 'react-redux'
 import {LinkContainer} from "react-router-bootstrap"
-import { useNavigate } from "react-router-dom"
 import { logout } from '../actions/userActions'
 import  SearchBox  from './SearchBox'
 
 const Header = () => {
   const dispatch=useDispatch()
-  const navigate=useNavigate()
 
   const userLogin=useSelector(state=>state.userLogin)
   const { userInfo }=userLogin
 
   const logoutHandler=()=>{
     dispatch(logout());
-    navigate('/login')
   }
 
   return (
@@ -28,12 +25,6 @@ const Header = () => {
         <Navbar.Collapse id="basic-navbar-nav">
         <SearchBox/>
           <Nav className="ml-auto">
-
-          <LinkContainer to="/plan">
-            <Nav.Link>Buy Plan</Nav.Link>
-          </LinkContainer>
-
-
           <LinkContainer to="/cart">
             <Nav.Link> <i className="fas fa-shopping-cart"></i> Cart</Nav.Link>
           </LinkContainer>
@@ -62,19 +53,23 @@ const Header = () => {
                 <NavDropdown.Item>Orders</NavDropdown.Item>
               </LinkContainer>
             </NavDropdown>
-          )}    
+          )}   
 
           {userInfo && userInfo.isSeller && (
             <NavDropdown title="Seller" id="sellermenu">
               <LinkContainer to="/seller/productlist">
                 <NavDropdown.Item>Products</NavDropdown.Item>
               </LinkContainer>
-             
             </NavDropdown>
           )}  
 
-
-
+          {userInfo && (!userInfo.isSeller && !userInfo.isAdmin) && (
+            <LinkContainer to="/paySeller">
+            <Nav.Link>Buy Plan</Nav.Link>
+          </LinkContainer>
+          )}  
+        
+        
           </Nav>
         </Navbar.Collapse>
       </Container>

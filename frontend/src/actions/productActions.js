@@ -190,7 +190,10 @@ export const listTopProducts=()=>async(dispatch)=>{
     const { data } = await axios.get(
       `/api/products/top`
     )
+<<<<<<< HEAD
 
+=======
+>>>>>>> acd53af42c0d52659c3113314a277fe22dcc459b
     dispatch({
       type:PRODUCT_TOP_SUCCESS,
       payload:data
@@ -203,12 +206,18 @@ export const listTopProducts=()=>async(dispatch)=>{
   }
 }
 
+<<<<<<< HEAD
 
 export const sellerProductsList = (id) => async (dispatch, getState) => {
   try {
     dispatch({
       type: SELLER_PRODUCTS_REQUEST,
     })
+=======
+export const sellerProducts=(id)=>async(dispatch,getState)=>{
+  try {
+    dispatch({type:SELLER_PRODUCTS_REQUEST})
+>>>>>>> acd53af42c0d52659c3113314a277fe22dcc459b
 
     const {
       userLogin: { userInfo },
@@ -220,6 +229,7 @@ export const sellerProductsList = (id) => async (dispatch, getState) => {
       },
     }
 
+<<<<<<< HEAD
     const {data}=await axios.get(`/api/products/user/${id}`, config)
 
     dispatch({
@@ -238,3 +248,19 @@ export const sellerProductsList = (id) => async (dispatch, getState) => {
     })
   }
 }
+=======
+    const { data } = await axios.get(
+      `/api/products/user/${id}`,config
+    )
+    dispatch({
+      type:SELLER_PRODUCTS_SUCCESS,
+      payload:data
+    })
+  } catch (error) {
+    dispatch({
+      type:SELLER_PRODUCTS_FAIL,
+      payload:error.response && error.response.data.message?error.response.data.message:error.message
+    })
+  }
+}
+>>>>>>> acd53af42c0d52659c3113314a277fe22dcc459b

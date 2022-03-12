@@ -86,7 +86,13 @@ export const payOrder= (orderId,paymentResult)=>async(dispatch,getState)=>{
         'Content-Type':'application/json',
         Authorization: `Bearer ${userInfo.token}`
       }
+<<<<<<< HEAD
     }   
+=======
+    }
+
+    
+>>>>>>> acd53af42c0d52659c3113314a277fe22dcc459b
     const{ data }=await axios.put(`/api/orders/${orderId}/pay`,paymentResult,config)
 
     dispatch({

@@ -1,7 +1,11 @@
 import {createStore,combineReducers,applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
+<<<<<<< HEAD
 import { productListReducer, productDetailsReducer,productDeleteReducer,productCreateReducer, productUpdateReducer, productReviewCreateReducer, productTopRatedReducer,sellerProductListReducer } from './reducers/productReducers'
+=======
+import { productListReducer, productDetailsReducer,productDeleteReducer,productCreateReducer, productUpdateReducer, productReviewCreateReducer, productTopRatedReducer,sellerProductsReducer } from './reducers/productReducers'
+>>>>>>> acd53af42c0d52659c3113314a277fe22dcc459b
 import { cartReducer } from './reducers/cartReducers'
 import { userLoginReducer, userRegisterReducer, userDetailsReducer,userUpdateProfileReducer, userListReducer,userDeleteReducer,userUpdateReducer } from './reducers/userReducers'
 import { orderCreateReducer,orderDetailsReducer, orderPayReducer,orderListMyReducer,orderListReducer,orderDeliverReducer, stockUpdateReducer } from './reducers/orderReducers'
@@ -15,7 +19,11 @@ const reducer=combineReducers({
   productUpdate:productUpdateReducer,
   productReviewCreate:productReviewCreateReducer,
   productTopRated:productTopRatedReducer,
+<<<<<<< HEAD
   sellerProductList:sellerProductListReducer,
+=======
+  sellerProducts:sellerProductsReducer,
+>>>>>>> acd53af42c0d52659c3113314a277fe22dcc459b
   cart:cartReducer,
   userLogin:userLoginReducer,
   userRegister:userRegisterReducer,

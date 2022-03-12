@@ -5,7 +5,7 @@ import {Table, Button,Row,Col} from 'react-bootstrap'
 import {useDispatch, useSelector} from 'react-redux'
 import Message from "../components/Message"
 import Loader from "../components/Loader"
-import { listProducts,deleteProduct,createProduct } from '../actions/productActions'
+import { listProducts,deleteProduct,createProduct,sellerProducts } from '../actions/productActions'
 import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
 import Paginate from '../components/Paginate'
 
@@ -22,7 +22,8 @@ const ProductListScreen = () => {
   const productDelete=useSelector(state=>state.productDelete)
   const {loading:loadingDelete,error:errorDelete,success:successDelete}=productDelete
 
-  
+  const sellerProducts=useSelector(state=>state.sellerProducts)
+  const {products:sellerCreatedProducts}=sellerProducts
 
   const productCreate=useSelector(state=>state.productCreate)
   const {loading:loadingCreate,error:errorCreate,success:successCreate,product:createdProduct}=productCreate
@@ -35,10 +36,15 @@ const ProductListScreen = () => {
     if(!userInfo.isAdmin && !userInfo.isSeller){
       navigate('/login')
     }
-    if(successCreate){
+   
+    if(successCreate ){
       navigate(`/admin/product/${createdProduct._id}/edit`)
     }else{
-      dispatch(listProducts('',pageNumber))
+      if(userInfo.isSeller){
+        navigate('/seller/productlist')
+      }else{
+         dispatch(listProducts('',pageNumber))
+      }
     }
   },[dispatch,userInfo,navigate,successDelete,successCreate,createdProduct,pageNumber])
 
@@ -51,20 +57,6 @@ const ProductListScreen = () => {
       dispatch(deleteProduct(id))
     }
   }
-console.log(products.length)
-  var sellerCreatedProducts=[]
-  if(userInfo.isSeller){
-    sellerCreatedProducts=products.filter(checkCreated);
-    function checkCreated(product){
-      if(product.user === userInfo._id){
-        return product
-      }
-    }
-  }
-
- 
-  
-
 
   return (
     <>
@@ -96,7 +88,6 @@ console.log(products.length)
             </tr>
           </thead>
           <tbody>
-            {/* <h2>Admin</h2>
             {products.map(product=>(
               <tr key={product._id}>
                 <td>{product._id}</td>
@@ -119,71 +110,7 @@ console.log(products.length)
               </tr>
             ))}
 
-
-            <h2>Seller</h2>
-            {sellerCreatedProducts.map(product=>(
-              <tr key={product._id}>
-                <td>{product._id}</td>
-                <td>{product.name}</td>
-                <td>${product.price}</td>
-                <td>{product.category}</td>
-                <td>{product.brand}</td>
-
-                <td>
-                  <LinkContainer to={`/admin/product/${product._id}/edit`}>
-                    <Button variant='light' className='btn-sm'>
-                      <i className='fas fa-edit'></i>
-                    </Button>
-                  </LinkContainer>
-                  <Button variant='danger' className='btn-sm' onClick={()=>deleteHandler(product._id)}>
-                      <i className='fas fa-trash'></i>
-                    </Button> 
-                </td>
-
-              </tr>
-            ))} */}
-
-          {userInfo.isAdmin?products.map(product=>(
-              <tr key={product._id}>
-                <td>{product._id}</td>
-                <td>{product.name}</td>
-                <td>${product.price}</td>
-                <td>{product.category}</td>
-                <td>{product.brand}</td>
-
-                <td>
-                  <LinkContainer to={`/admin/product/${product._id}/edit`}>
-                    <Button variant='light' className='btn-sm'>
-                      <i className='fas fa-edit'></i>
-                    </Button>
-                  </LinkContainer>
-                  <Button variant='danger' className='btn-sm' onClick={()=>deleteHandler(product._id)}>
-                      <i className='fas fa-trash'></i>
-                    </Button>
-                </td>
-              </tr>
-            )):sellerCreatedProducts.map(product=>(
-              <tr key={product._id}>
-                <td>{product._id}</td>
-                <td>{product.name}</td>
-                <td>${product.price}</td>
-                <td>{product.category}</td>
-                <td>{product.brand}</td>
-
-                <td>
-                  <LinkContainer to={`/admin/product/${product._id}/edit`}>
-                    <Button variant='light' className='btn-sm'>
-                      <i className='fas fa-edit'></i>
-                    </Button>
-                  </LinkContainer>
-                  <Button variant='danger' className='btn-sm' onClick={()=>deleteHandler(product._id)}>
-                      <i className='fas fa-trash'></i>
-                    </Button>
-                </td>
-
-              </tr>
-            ))}
-
+            
           </tbody>
         </Table>
         <Paginate pages={pages} page={page} isAdmin={true}/>

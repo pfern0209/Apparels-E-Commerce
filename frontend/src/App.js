@@ -16,9 +16,9 @@ import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
 import ProductListScreen from './screens/ProductListScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
-import SellerProductListScreen from './screens/ProductEditScreen';
 import OrderListScreen from './screens/OrderListScreen';
-import PlanScreen from './screens/PlanScreen';
+import SellerProductListScreen from './screens/SellerProductListScreen';
+import PaySellerScreen from './screens/PaySellerScreen';
 
 
 
@@ -57,6 +57,13 @@ const App= () => {
         }>  
         </Route>
 
+        <Route exact path="/paySeller" element={
+          <>
+            <PaySellerScreen/>
+          </>
+        }>  
+        </Route>
+
         <Route path="/login" element={
           <>
             <LoginScreen/>
@@ -78,29 +85,14 @@ const App= () => {
         }>  
         </Route>
 
-        <Route path="/plan" element={
-          <>
-            <PlanScreen/>
-          </>
-        }>  
-        </Route>
-
-        {/* Seller Products list */}
-        <Route exact path="/seller/productlist" element={
+        <Route path="/seller/productlist" element={
           <>
             <SellerProductListScreen/>
           </>
         }>  
         </Route>
 
-        {/* <Route path="/admin/product/:id/edit" element={
-          <>
-            <ProductEditScreen/>
-          </>
-        }>  
-        </Route> */}
-
-        <Route exact path="/product/:id" element={
+        <Route path="/product/:id" element={
           <>
             <ProductScreen/>
           </>
@@ -139,9 +131,8 @@ const App= () => {
           </>
         }>  
         </Route>
-{/* Original */}
 
-        <Route exact path="/admin/product/:id/edit" element={
+        <Route path="/admin/product/:id/edit" element={
           <>
             <ProductEditScreen/>
           </>

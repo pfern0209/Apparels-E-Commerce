@@ -1,5 +1,7 @@
 import Product from "../models/productModel.js";
+import User from "../models/userModel.js";
 import asyncHandler from 'express-async-handler'
+
 
 //@desc Fetches all products
 //@route GET /api/products
@@ -18,14 +20,6 @@ const getProducts=asyncHandler(async(req,res)=>{
   const count=await Product.countDocuments({...keyword})
   const products=await Product.find({...keyword}).limit(pageSize).skip(pageSize*(page-1))
   res.json({products,page,pages:Math.ceil(count/pageSize)})
-})
-
-//@desc Get product list for seller
-//@route GET /api/seller/user/products/:id
-//@access Seller
-const getSellerProductList=asyncHandler(async(req,res)=>{
-  const sellerProducts= await Product.find({"user":[req.params.id]})
-  res.json({sellerProducts})
 })
 
 //@desc Fetches one product
@@ -152,6 +146,13 @@ const getTopProducts=asyncHandler(async(req,res)=>{
   res.json(products)
 })
 
+//@desc Get products created by seller
+//@route GET /api/products/user/:id
+//@access Private seller
 
+const getSellerCreatedProducts=asyncHandler(async(req,res)=>{
+  const sellerProducts= await Product.find({"user":[req.params.id]})
+  res.json(sellerProducts)
+})
 
-export {getProductById,getProducts,deleteProduct,createProduct,updateProduct,createProductReview,getTopProducts,getSellerProductList}
+export {getProductById,getProducts,deleteProduct,createProduct,updateProduct,createProductReview,getTopProducts,getSellerCreatedProducts}

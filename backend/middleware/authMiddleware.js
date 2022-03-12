@@ -46,11 +46,19 @@ const sellerOrAdmin=(req,res,next)=>{
 }
 
 const seller=(req,res,next)=>{
+<<<<<<< HEAD
   if(req.user && (req.user.isSeller)){
     next();
   }else{
     res.status(401);
     throw new Error("You are not authorized as a seller");
+=======
+  if(req.user && req.user.isSeller){
+    next();
+  }else{
+    res.status(401);
+    throw new Error("You are either not a seller or admin");
+>>>>>>> acd53af42c0d52659c3113314a277fe22dcc459b
   }
 }
 
